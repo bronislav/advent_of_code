@@ -33,6 +33,12 @@ module Year2023
 
         assert_equal 18, Part2Solution.new(input).solve
       end
+
+      def test_solves_actual_input
+        input = File.read(File.expand_path('../../../../input/2023/01.txt', __FILE__))
+
+        assert_equal 54875, Part2Solution.new(input).solve
+      end
     end
   end
 end

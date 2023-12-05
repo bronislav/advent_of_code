@@ -12,7 +12,13 @@ module Year2023
           treb7uchet
         INPUT
 
-        assert Part1Solution.new(input).solve == 142
+        assert_equal 142, Part1Solution.new(input).solve
+      end
+
+      def test_solves_actual_input
+        input = File.read(File.expand_path('../../../../input/2023/01.txt', __FILE__))
+
+        assert_equal 55538, Part1Solution.new(input).solve
       end
     end
   end
