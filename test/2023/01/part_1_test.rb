@@ -16,9 +16,9 @@ module Year2023
       end
 
       def test_solves_actual_input
-        input = File.read(File.expand_path('../../../../input/2023/01.txt', __FILE__))
+        input = File.read(File.expand_path('../../../input/2023/01.txt', __dir__))
 
-        assert_equal 55538, Part1Solution.new(input).solve
+        assert_equal 55_538, Part1Solution.new(input).solve
       end
     end
   end
