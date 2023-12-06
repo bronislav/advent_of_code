@@ -1,5 +1,4 @@
 require 'minitest/autorun'
-require_relative '../../../solutions/2023/02/part_2'
 
 module Year2023
   module Day02
@@ -17,9 +16,7 @@ module Year2023
       end
 
       def test_solves_actual_input
-        input = File.read(File.expand_path('../../../input/2023/02.txt', __dir__))
-
-        assert_equal 67_363, Part2Solution.new(input).solve
+        assert_equal 67_363, Part2Solution.new.solve
       end
     end
   end

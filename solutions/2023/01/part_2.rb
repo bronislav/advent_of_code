@@ -1,7 +1,7 @@
 module Year2023
   module Day01
     class Part2Solution < BaseSolution
-      WORDS = %w(zero one two three four five six seven eight nine)
+      WORDS = %w[zero one two three four five six seven eight nine].freeze
 
       def solve
         pattern = WORDS.map { |word| "(#{word})" }.join('|')

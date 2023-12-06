@@ -57,22 +57,19 @@ class App < Thor
       File.open("test/2023/#{day_str}/part_#{part}_test.rb", 'w') do |file|
         file.write(<<~RUBY)
           require 'minitest/autorun'
-          require_relative '../../../solutions/2023/#{day_str}/part_#{part}'
 
           module Year2023
             module Day#{day_str}
               class Part#{part}Test < Minitest::Test
                 def test_solves_sample_input
-                  input = <<~INPUT 
+                  input = <<~INPUT
                   INPUT
 
                   # assert_equal <>, Part#{part}Solution.new(input).solve
                 end
 
                 def test_solves_actual_input
-                  input = File.read(File.expand_path('../../../input/2023/#{day_str}.txt', __dir__))
-
-                  # assert_equal <>, Part#{part}Solution.new(input).solve
+                  # assert_equal <>, Part#{part}Solution.new.solve
                 end
               end
             end
