@@ -24,6 +24,7 @@ GEM
       concurrent-ruby (~> 1.0)
     json (2.7.1)
     language_server-protocol (3.17.0.3)
+    memoist (0.16.2)
     method_source (1.0.0)
     minitest (5.20.0)
     mutex_m (0.2.0)
@@ -66,6 +67,7 @@ DEPENDENCIES
   activesupport
   benchmark
   bundler
+  memoist
   minitest
   pry
   require_all
