@@ -21,6 +21,8 @@ class BaseSolution
                     .match(/Year(?<year>\d+).+Day(?<day>\d+)/)
                     &.values_at(:year, :day)
 
-    File.join(Dir.pwd, "input/#{year}/#{day}.txt")
+    base_path = File.join(Dir.pwd, "input/#{year}/#{day}")
+    puts "base_path: #{base_path}, dir?: #{File.directory?(base_path)}"
+    File.directory?(base_path) ? File.join(base_path, 'input') : "#{base_path}.txt"
   end
 end

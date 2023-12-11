@@ -15,7 +15,10 @@ class App < Thor
 
     Instrument.time do
       clazz = Object.const_get("Year2023::Day#{day.rjust(2, '0')}::Part#{part}Solution")
-      input = File.read("input/2023/#{day.rjust(2, '0')}.txt")
+
+      base_path = File.join(Dir.pwd, "input/2023/#{day.rjust(2, '0')}")
+      input_path = File.directory?(base_path) ? File.join(base_path, 'input') : File.read("#{base_path}.txt")
+      input = File.read(input_path)
 
       puts "Result: #{clazz.new(input).solve}"
     end
