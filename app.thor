@@ -55,14 +55,21 @@ class App < Thor
   desc 'setup DAY', 'Setup a new day'
   def setup(day)
     day_str = day.rjust(2, '0')
-
-    base_path = File.join(Dir.pwd, "2023/#{day_str}")
+    year = '2023'
+    base_path = File.join(Dir.pwd, "#{year}/#{day_str}")
 
     FileUtils.mkdir_p("#{base_path}/input")
 
-    FileUtils.touch("#{base_path}/input/input")
-    FileUtils.touch("#{base_path}/input/sample_01")
-    FileUtils.touch("#{base_path}/input/sample_02")
+    # Write task input
+    resp = http.get("/#{year}/day/#{day}/input", headers)
+    File.write("#{base_path}/input/input", resp.body)
+
+    # Write sample inputs
+    resp = http.get("/#{year}/day/#{day}", headers)
+    document = Nokogiri::HTML.parse(resp.body)
+    document.css('pre code').each_with_index do |code, i|
+      File.write("#{base_path}/input/sample_#{i + 1}", code.text)
+    end
 
     File.open("#{base_path}/solution.rb", 'w') do |file|
       file.write(<<~RUBY)
@@ -71,14 +78,14 @@ class App < Thor
             module Day#{day_str}
               PART_ONE = {
                 'input' => 0,
-                'sample_01' => 0,
-                'sample_02' => 1
+                'sample_1' => 0,
+                'sample_2' => 0
               }.freeze
 
               PART_TWO = {
                 'input' => 0,
-                'sample_01' => 0,
-                'sample_02' => 1
+                'sample_1' => 0,
+                'sample_2' => 0
               }.freeze
 
               class Solution < BaseSolution
@@ -94,6 +101,19 @@ class App < Thor
           end
         end
       RUBY
+    end
+  end
+
+  no_commands do
+    def headers
+      @headers ||= {
+        'Cookie' => File.read(File.join(Dir.pwd, 'cookies', 'advent_of_code')).chomp,
+        'User-Agent' => 'https://github.com/bronislav/advent_of_code by anton@ilin.dn.ua'
+      }
+    end
+
+    def http
+      @http ||= Net::HTTP.start('adventofcode.com', 443, use_ssl: true)
     end
   end
 end
