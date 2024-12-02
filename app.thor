@@ -13,7 +13,7 @@ class App < Thor
   def solve(day, part)
     puts "Solving day #{day} part #{part}..."
     day_str = day.rjust(2, '0')
-    base_path = File.join(Dir.pwd, "2023/#{day_str}")
+    base_path = File.join(Dir.pwd, "2024/#{day_str}")
 
     require_relative "#{base_path}/solution"
 
@@ -29,7 +29,7 @@ class App < Thor
   desc 'test DAY PART', 'Run tests for a given day and part'
   def test(day, part)
     day_str = day.rjust(2, '0')
-    base_path = File.join(Dir.pwd, "2023/#{day_str}")
+    base_path = File.join(Dir.pwd, "2024/#{day_str}")
 
     require_relative "#{base_path}/solution"
 
@@ -55,7 +55,7 @@ class App < Thor
   desc 'setup DAY', 'Setup a new day'
   def setup(day)
     day_str = day.rjust(2, '0')
-    year = '2023'
+    year = '2024'
     base_path = File.join(Dir.pwd, "#{year}/#{day_str}")
 
     FileUtils.mkdir_p("#{base_path}/input")
